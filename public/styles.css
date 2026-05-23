@@ -1,0 +1,718 @@
+/* CSS Custom Properties / Design Tokens */
+:root {
+    --bg-gradient: radial-gradient(circle at 10% 20%, rgb(18, 16, 33) 0%, rgb(9, 8, 16) 90%);
+    --panel-bg: rgba(255, 255, 255, 0.03);
+    --panel-border: rgba(255, 255, 255, 0.06);
+    --panel-glow: rgba(147, 51, 234, 0.1);
+    
+    --primary-color: hsl(265, 85%, 65%);
+    --primary-hover: hsl(265, 90%, 72%);
+    --accent-color: hsl(180, 80%, 45%);
+    --text-main: hsl(0, 0%, 94%);
+    --text-muted: hsl(250, 10%, 65%);
+    --sidebar-width: 320px;
+    
+    --success-color: hsl(142, 70%, 50%);
+    --warning-color: hsl(38, 92%, 50%);
+    --danger-color: hsl(346, 84%, 61%);
+    
+    --font-chat: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    
+    --blur-strength: 16px;
+    --border-radius-lg: 16px;
+    --border-radius-md: 12px;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+    --bg-gradient: linear-gradient(135deg, #f5f3ff 0%, #e0e7ff 100%);
+    --panel-bg: rgba(255, 255, 255, 0.45);
+    --panel-border: rgba(255, 255, 255, 0.6);
+    --panel-glow: rgba(99, 102, 241, 0.05);
+    
+    --primary-color: hsl(250, 75%, 55%);
+    --primary-hover: hsl(250, 80%, 62%);
+    --accent-color: hsl(190, 85%, 40%);
+    --text-main: hsl(224, 71%, 15%);
+    --text-muted: hsl(220, 10%, 45%);
+    
+    --blur-strength: 20px;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-chat);
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Main Container: Full Glass Interface */
+.glass-container {
+    width: 95vw;
+    height: 90vh;
+    max-width: 1440px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* SIDEBAR LAYOUT */
+.sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    border-right: 1px solid var(--panel-border);
+    background: rgba(0, 0, 0, 0.15);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 28px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+.brand h1 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Widgets Container */
+.dashboard-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.widget {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.widget:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.widget h3 {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.widget-content.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    text-align: center;
+}
+
+.status-msg {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* WEATHER CARD DESIGN */
+.weather-card-widget {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-header h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.weather-sim-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    color: var(--text-muted);
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.weather-icon {
+    font-size: 36px;
+    background: linear-gradient(135deg, #febb02, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.cloud {
+    background: linear-gradient(135deg, #90caf9, #42a5f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.snowflake {
+    background: linear-gradient(135deg, #e0f7fa, #00acc1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.moon {
+    background: linear-gradient(135deg, #cfd8dc, #546e7a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.cloud-sun {
+    background: linear-gradient(135deg, #ffb74d, #90caf9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.cloud-moon {
+    background: linear-gradient(135deg, #b0bec5, #37474f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.cloud-rain {
+    background: linear-gradient(135deg, #81d4fa, #0288d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.cloud-showers-heavy {
+    background: linear-gradient(135deg, #4fc3f7, #1565c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.bolt {
+    background: linear-gradient(135deg, #ffee58, #f57f17);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-icon.smog {
+    background: linear-gradient(135deg, #e0e0e0, #78909c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.weather-temp {
+    font-size: 32px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+
+.weather-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--panel-border);
+    padding-top: 8px;
+}
+
+.weather-details div {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* REMINDERS LIST DESIGN */
+.reminders-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.reminder-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--border-radius-md);
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.reminder-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.reminder-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.reminder-text {
+    font-weight: 500;
+}
+
+.reminder-time {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.delete-rem-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.delete-rem-btn:hover {
+    color: var(--danger-color);
+}
+
+/* CHAT AREA LAYOUT */
+.chat-area {
+    flex-grow: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.chat-header {
+    height: 70px;
+    border-bottom: 1px solid var(--panel-border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.assistant-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.online {
+    background: var(--success-color);
+    box-shadow: 0 0 10px var(--success-color);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Message styling */
+.message {
+    display: flex;
+    gap: 16px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.message.assistant {
+    align-self: flex-start;
+}
+
+.message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.message.user .avatar {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+}
+
+.message-content {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--panel-border);
+    padding: 14px 18px;
+    border-radius: var(--border-radius-md);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.message-content p {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.message.user .message-content {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.timestamp {
+    display: block;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-align: right;
+}
+
+/* INPUT FOOTER */
+.chat-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--panel-border);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--panel-border);
+    border-radius: 50px;
+    padding: 6px 12px;
+    transition: all 0.3s;
+}
+
+.input-container:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px var(--panel-glow);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.input-container input {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-main);
+    font-family: var(--font-chat);
+    font-size: 15px;
+    padding: 10px 16px;
+}
+
+.input-container input::placeholder {
+    color: var(--text-muted);
+}
+
+/* BUTTONS */
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mic-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 8px;
+    transition: all 0.3s;
+}
+
+.mic-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+}
+
+.mic-btn.active {
+    background: var(--danger-color);
+    color: white;
+    animation: micPulse 1.5s infinite ease-in-out;
+    box-shadow: 0 0 15px var(--danger-color);
+}
+
+.send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.send-btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* EMAIL DRAFT POPUP OVERLAY */
+.email-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.email-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.email-card {
+    width: 500px;
+    background: rgba(20, 18, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.email-modal.active .email-card {
+    transform: scale(1);
+}
+
+.email-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email-header h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.email-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.email-body .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.email-body label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.email-body span {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--panel-border);
+    padding: 8px 12px;
+    border-radius: var(--border-radius-md);
+}
+
+.message-field p {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--panel-border);
+    padding: 12px;
+    border-radius: var(--border-radius-md);
+    min-height: 100px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.email-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--panel-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid var(--panel-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Custom Scrollbar for list-style elements */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+    0% { filter: drop-shadow(0 0 2px var(--primary-color)); }
+    50% { filter: drop-shadow(0 0 8px var(--primary-color)); }
+    100% { filter: drop-shadow(0 0 2px var(--primary-color)); }
+}
+
+@keyframes micPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}

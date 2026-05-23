@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riko - Advanced Voice Assistant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <!-- Sidebar Dashboard -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-wand-magic-sparkles logo-icon"></i>
+                <h1>Riko</h1>
+            </div>
+            
+            <div class="dashboard-widgets">
+                <!-- Weather Widget -->
+                <div class="widget weather-widget" id="weather-widget">
+                    <h3><i class="fa-solid fa-cloud-sun"></i> Weather</h3>
+                    <div class="widget-content placeholder" id="weather-content">
+                        <p class="status-msg">No weather data loaded. Ask Riko about the weather!</p>
+                    </div>
+                </div>
+
+                <!-- Reminders Widget -->
+                <div class="widget reminders-widget">
+                    <div class="widget-header">
+                        <h3><i class="fa-solid fa-clock"></i> Reminders</h3>
+                    </div>
+                    <div class="widget-content" id="reminders-content">
+                        <ul class="reminders-list" id="reminders-list">
+                            <!-- Reminders injected dynamically -->
+                        </ul>
+                        <p class="status-msg" id="reminders-empty">No active reminders.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="assistant-status">
+                    <div class="status-indicator online"></div>
+                    <span>Riko AI Online</span>
+                </div>
+                <div class="system-controls">
+                    <button class="icon-btn" id="theme-toggle" title="Toggle theme">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    <div class="avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hello! I am Riko, your advanced voice assistant. How can I help you today?</p>
+                        <span class="timestamp">Just now</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Input Bar -->
+            <footer class="chat-footer">
+                <form id="chat-form" class="input-container">
+                    <input type="text" id="user-input" placeholder="Type a command or ask a question..." autocomplete="off">
+                    <button type="button" class="mic-btn" id="mic-btn" title="Simulate Voice Input">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <button type="submit" class="send-btn" id="send-btn-submit" title="Send message">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
